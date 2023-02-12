@@ -1,0 +1,57 @@
+menu "ST7789 Configuration"
+
+	config MOSI_GPIO
+		int "MOSI GPIO number"
+		default 33
+		help
+			GPIO number (IOxx) to SPI MOSI.
+
+	config SCLK_GPIO
+		int "SCLK GPIO number"
+		default 32
+		help
+			GPIO number (IOxx) to SPI SCLK.
+
+	config CS_GPIO
+		int "CS GPIO number"
+		default 12
+		help
+			GPIO number (IOxx) to SPI CS.
+
+	config DC_GPIO
+		int "DC GPIO number"
+		default 13
+		help
+			GPIO number (IOxx) to SPI DC.
+
+	config RESET_GPIO
+		int "RESET GPIO number"
+		default 14
+		help
+			GPIO number (IOxx) to RESET.
+
+	config SPI_FREQUENCY
+		int "SPI Frequency (MHZ)"
+		range 1 80
+		default 20
+		help
+			SPI Frequency for LCD in MHz.
+
+	choice SPI_HOST
+		prompt "SPI peripheral that controls this bus"
+		default SPI2_HOST
+		help
+			Select SPI peripheral that controls this bus.
+		config SPI2_HOST
+			bool "SPI2_HOST"
+			help
+				Use SPI2_HOST. This is also called HSPI_HOST.
+		config SPI3_HOST
+			depends on IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+			bool "SPI3_HOST"
+			help
+				USE SPI3_HOST. This is also called VSPI_HOST
+	endchoice
+
+endmenu
+
