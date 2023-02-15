@@ -13,10 +13,16 @@
 
 #define PARALLEL_LINES 2
 
-#if defined(CONFIG_SPI2_HOST)
-#define LCD_HOST CONFIG_SPI2_HOST
-#elif defined(CONFIG_SPI3_HOST)
-#define LCD_HOST CONFIG_SPI3_HOST
+#if defined(CONFIG_LCD_SPI2_HOST)
+#define LCD_HOST CONFIG_LCD_SPI2_HOST
+#elif defined(CONFIG_LCD_SPI3_HOST)
+#define LCD_HOST CONFIG_LCD_SPI3_HOST
+#endif
+
+#if defined(CONFIG_LCD_SPI_MODE_DIO)
+#define LCD_SPI_MODE SPI_TRANS_MODE_DIO
+#elif defined(CONFIG_LCD_SPI_MODE_QIO)
+#define LCD_SPI_MODE SPI_TRANS_MODE_QIO
 #endif
 
 typedef struct

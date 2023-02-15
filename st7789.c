@@ -3,8 +3,8 @@
 void init_lcd(st7789_t *lcd)
 {
 	spi_bus_config_t buscfg = {
-		.sclk_io_num = CONFIG_SCLK_GPIO,
-		.mosi_io_num = CONFIG_MOSI_GPIO,
+		.sclk_io_num = CONFIG_LCD_SCLK_GPIO,
+		.mosi_io_num = CONFIG_LCD_MOSI_GPIO,
 		.miso_io_num = -1,
 		.quadwp_io_num = -1,
 		.quadhd_io_num = -1,
@@ -14,12 +14,12 @@ void init_lcd(st7789_t *lcd)
 	ESP_ERROR_CHECK(spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO));
 
 	esp_lcd_panel_io_spi_config_t io_config = {
-		.dc_gpio_num = CONFIG_DC_GPIO,
-		.cs_gpio_num = CONFIG_CS_GPIO,
-		.pclk_hz = CONFIG_SPI_FREQUENCY * 1000 * 1000,
+		.dc_gpio_num = CONFIG_LCD_DC_GPIO,
+		.cs_gpio_num = CONFIG_LCD_CS_GPIO,
+		.pclk_hz = CONFIG_LCD_SPI_FREQUENCY * 1000 * 1000,
 		.lcd_cmd_bits = 8,
 		.lcd_param_bits = 8,
-		.spi_mode = 0,
+		.spi_mode = LCD_SPI_MODE,
 		.trans_queue_depth = 10,
 	};
 
@@ -27,7 +27,7 @@ void init_lcd(st7789_t *lcd)
 	ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)LCD_HOST, &io_config, &lcd->io_handle));
 
 	esp_lcd_panel_dev_config_t panel_config = {
-		.reset_gpio_num = CONFIG_RESET_GPIO,
+		.reset_gpio_num = CONFIG_LCD_RESET_GPIO,
 		.rgb_endian = LCD_RGB_ENDIAN_RGB,
 		.bits_per_pixel = 16,
 	};
