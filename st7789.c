@@ -16,7 +16,7 @@ void init_lcd(st7789_t *lcd)
 	esp_lcd_panel_io_spi_config_t io_config = {
 		.dc_gpio_num = CONFIG_DC_GPIO,
 		.cs_gpio_num = CONFIG_CS_GPIO,
-		.pclk_hz = 40000000,
+		.pclk_hz = CONFIG_SPI_FREQUENCY * 1000 * 1000,
 		.lcd_cmd_bits = 8,
 		.lcd_param_bits = 8,
 		.spi_mode = 0,
