@@ -19,9 +19,6 @@
 #define LCD_HOST CONFIG_SPI3_HOST
 #endif
 
-#define LCD_HOR_RES 320
-#define LCD_VER_RES 240
-
 typedef struct
 {
 	esp_lcd_panel_io_handle_t io_handle;

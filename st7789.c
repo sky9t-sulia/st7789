@@ -8,7 +8,7 @@ void init_lcd(st7789_t *lcd)
 		.miso_io_num = -1,
 		.quadwp_io_num = -1,
 		.quadhd_io_num = -1,
-		.max_transfer_sz = LCD_VER_RES * LCD_HOR_RES * 2 + 8};
+		.max_transfer_sz = CONFIG_LCD_VER_RES * CONFIG_LCD_HOR_RES * 2 + 8};
 
 	// Initialize the SPI bus
 	ESP_ERROR_CHECK(spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO));

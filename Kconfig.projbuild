@@ -37,6 +37,18 @@ menu "ST7789 Configuration"
 		help
 			SPI Frequency for LCD in MHz.
 
+	config LCD_VER_RES
+		int "LCD Vertical Resolution"
+		default 240
+		help
+			LCD Resolution in px
+
+	config LCD_HOR_RES
+		int "LCD Horizontal Resolution"
+		default 240
+		help
+			LCD Resolution in px
+
 	choice SPI_HOST
 		prompt "SPI peripheral that controls this bus"
 		default SPI2_HOST
