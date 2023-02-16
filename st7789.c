@@ -1,5 +1,7 @@
 #include "st7789.h"
 
+static const char* TAG = "LCD";
+
 void init_lcd(st7789_t *lcd)
 {
 	printf("LCD Configuration:\n");
@@ -10,7 +12,7 @@ void init_lcd(st7789_t *lcd)
 		CONFIG_LCD_CS_GPIO
 	);
 
-	printf(
+	ESP_LOGI(TAG, 
 		"%dx%d px | %d MHz | Mode: %d | Inverted: %s | Color format: %s\n", 
 		CONFIG_LCD_VER_RES, CONFIG_LCD_HOR_RES, 
 		CONFIG_LCD_SPI_FREQUENCY, LCD_SPI_MODE,
@@ -21,10 +23,15 @@ void init_lcd(st7789_t *lcd)
 	lcd->width = CONFIG_LCD_HOR_RES;
 	lcd->height = CONFIG_LCD_VER_RES;
 	lcd->buff_size = sizeof(uint16_t) * (CONFIG_LCD_HOR_RES * CONFIG_LCD_VER_RES);
-    lcd->disp_buff = heap_caps_malloc(lcd->buff_size, MALLOC_CAP_DMA);
+    lcd->disp_buff = malloc(lcd->buff_size);
+
+	if (!lcd->disp_buff) {
+		ESP_LOGE(TAG, "Can't allocate display buffer");
+		abort();
+	}
 
 	if (lcd->disp_buff) {
-		printf("Display buffer initialized\n");
+		ESP_LOGI(TAG, "Display buffer initialized");
 	}
 
 	spi_bus_config_t buscfg = {
