@@ -76,5 +76,26 @@ menu "ST7789 Configuration"
 			bool "DIO"
 	endchoice
 
+	choice LCD_COLOR_FORMAT
+		prompt "RGB endian (rgb, bgr)"
+		default LCD_COLOR_FORMAT_BGR
+		help
+			Change rgb endian if lcd displays wrong colors.
+		config LCD_COLOR_FORMAT_BGR
+			bool "BGR"
+		config LCD_COLOR_FORMAT_RGB
+			bool "RGB"
+	endchoice
+
+	config LCD_INVERT
+		bool "Inver colors"
+		default n
+
+	config LCD_SWAP_BITS
+		bool "Swap bits"
+		default n
+		help
+			Check if colors showing up incorrectly
+
 endmenu
 
