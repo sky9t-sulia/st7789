@@ -4,8 +4,7 @@ static const char* TAG = "LCD";
 
 void init_lcd(st7789_t *lcd)
 {
-	printf("LCD Configuration:\n");
-	printf(
+	ESP_LOGI(TAG, 
 		"MOSI %d, SCLK: %d, RST: %d, DC: %d CS: %d\n", 
 		CONFIG_LCD_MOSI_GPIO, CONFIG_LCD_SCLK_GPIO, 
 		CONFIG_LCD_RESET_GPIO, CONFIG_LCD_DC_GPIO, 
